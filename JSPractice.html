@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type='text/javascript'>
+        function changeText() {
+            if (document.getElementById('demo').innerHTML === 'JavaScript can change HTML content.')
+                document.getElementById('demo').innerHTML = 'Hello JavaScript!';
+            else document.getElementById('demo').innerHTML = 'JavaScript can change HTML content.';
+        }
+
+        function changeCss() {
+            document.getElementById('demo').style.fontSize = "35px";
+        }
+
+        function hideElement() {
+            document.getElementById('demo').style.display = "none"; 
+            document.getElementById('unhideButton').removeAttribute("disabled");
+            document.getElementById('unhideButton').style.border = "3px solid black";
+        }
+
+        function displayElement() {
+            document.getElementById('demo').style.display = "block";
+            document.getElementById("unhideButton").setAttribute("disabled", "disable");
+            document.getElementById('unhideButton').style.border = "1px solid black";
+        }
+        function varSubstitution() {
+                let firstName = "John";
+                let lastName = "Doe";
+                let text = `Welcome ${firstName}, ${lastName}!`;
+                return text;
+            }
+
+    </script>
+</head>
+
+<body>
+
+    <h2>What Can JavaScript Do?</h2>
+
+    <p id="demo">JavaScript can change HTML content.</p>
+
+    <button type="button" onclick="changeText()">Click Me To Change Content!</button><br />
+    <button type="button" onclick="changeCss()">Click to change CSS!</button><br />
+    <button type="button" onclick="hideElement()">Click to hide the above text!</button><br />
+    <button id="unhideButton" type="button" onclick="displayElement()">Click to unhide the hidden text!</button>
+    <script>document.getElementById("unhideButton").setAttribute("disabled", "disable")</script>
+    <button type="button" onclick="window.print()">Click this button to print the page!</button>
+    <button type="button" onclick="window.alert('Hi, I\'m an alert!!!')">Click to open alert!</button>
+    <p id="value"></p>
+    <p id="demoOne"></p>
+    <script>
+        let x, y, z;
+        x = y = 10;
+        z = x + y;
+        document.getElementById('value').innerHTML = z;
+        let p = "5" + 2 + 3;
+        document.getElementById("demoOne").innerHTML = p;
+        let q = 2 + 3 + "5";
+    </script>
+    <button id="demoTwo" onclick="this.innerHTML=varSubstitution()">Click(Var substitution)</button>
+    <p id="demoThree"></p>
+    <script>
+        const fruits = ["Banana", "Orange", "Apple"];
+        let fLen = fruits.length;
+
+        let text = "<ul>";
+        for (let i = 0; i < fLen; i++) {
+            text += "<li>" + fruits[i] + "</li>";
+        }
+        text += "</ul>";
+
+        document.getElementById("demoThree").innerHTML = text;
+    </script>
+    <p id="demoFour"></p>
+    <script>
+        const fruitsOne = ["Banana", "Orange", "Apple", "Mango"];
+
+        let textOne = "<ul>";
+        fruitsOne.forEach(myFunction);
+        texOne += "</ul>";
+        document.getElementById("demoFour").innerHTML = textOne;
+
+        function myFunction(value) {
+            textOne += "<li>" + value + "</li>";
+        } 
+    </script>
+</body>
+
+</html>
