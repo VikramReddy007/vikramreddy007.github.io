@@ -1,45 +1,37 @@
-.portfolio {
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+.header {
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
     padding: 20px;
-}
-
-.portfolio-item {
-    background-color: #f6f6f6;
-    border-radius: 10px;
-    padding: 15px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.portfolio-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    color: #34495e;
-    font-family: 'Arial', sans-serif;
     text-align: center;
-}
-
-.btn {
-    background: linear-gradient(90deg, #6a11cb, #2575fc);
-    border: none;
-    border-radius: 5px;
     color: white;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 2.5em;
+    font-weight: bold;
 }
 
-.btn:hover {
-    background-color: #5e7d99;
+.section {
+    padding: 20px;
+    margin: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 600px) {
-    .portfolio {
-        grid-template-columns: 1fr;
+.section:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s;
+}
+
+@media (max-width: 768px) {
+    .header {
+        font-size: 1.5em;
     }
+    .section {
+        padding: 10px;
+    }
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
