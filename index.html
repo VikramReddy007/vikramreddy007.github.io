@@ -1,66 +1,672 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vikram Reddy - Software QA Engineer Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vikram Reddy | QA Engineer & Test Automation Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #18181f;
+      --accent: #00e5a0;
+      --accent2: #7b61ff;
+      --accent3: #ff6b6b;
+      --text: #e8e8f0;
+      --muted: #6b6b80;
+      --border: rgba(255,255,255,0.07);
+      --glow: rgba(0,229,160,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.78rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(123,97,255,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,229,160,0.08) 0%, transparent 70%);
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,229,160,0.08);
+      border: 1px solid rgba(0,229,160,0.2);
+      border-radius: 2px; padding: 0.3rem 0.9rem;
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-tag::before { content: '▶'; font-size: 0.5rem; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.05; letter-spacing: -0.02em;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+      display: block;
+    }
+    .hero-desc {
+      margin-top: 1.5rem;
+      color: var(--muted);
+      max-width: 44ch;
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-ctas {
+      margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn {
+      padding: 0.8rem 1.8rem; border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent); color: #000;
+      border: none; font-weight: 500;
+    }
+    .btn-primary:hover { background: #00ffb3; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,229,160,0.3); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-stats {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; padding-left: 4rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px; padding: 1.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .stat-card:hover { border-color: rgba(0,229,160,0.3); transform: translateY(-4px); }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem; font-weight: 800;
+      color: var(--accent); line-height: 1;
+    }
+    .stat-label {
+      color: var(--muted); font-size: 0.72rem;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.4rem;
+    }
+    .stat-card.purple .stat-num { color: var(--accent2); }
+    .stat-card.red .stat-num { color: var(--accent3); }
+    .stat-card.white .stat-num { color: var(--text); }
+
+    /* ── SECTIONS ── */
+    section { position: relative; padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 3rem;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, rgba(0,229,160,0.3), transparent);
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 1rem; line-height: 1.1;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--surface); margin: 0; max-width: none; padding: 6rem 4rem; }
+    #skills > * { max-width: 1200px; margin: 0 auto; }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+    }
+    .skill-group {
+      background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 1.8rem;
+      transition: border-color 0.2s;
+    }
+    .skill-group:hover { border-color: rgba(123,97,255,0.4); }
+    .skill-group-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 1rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border); border-radius: 2px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.72rem; color: var(--muted);
+      transition: all 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--accent2); color: var(--text); }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px; background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+    .timeline-item {
+      padding-left: 3rem; margin-bottom: 3.5rem; position: relative;
+      opacity: 0; transform: translateX(-20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+    .timeline-dot {
+      position: absolute; left: -5px; top: 0.4rem;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+    .timeline-date {
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.5rem;
+    }
+    .timeline-role {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem; font-weight: 700;
+    }
+    .timeline-company {
+      color: var(--muted); font-size: 0.82rem; margin-top: 0.2rem;
+      margin-bottom: 1rem;
+    }
+    .timeline-desc { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.88rem; }
+    .timeline-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .timeline-skill {
+      background: rgba(0,229,160,0.06); border: 1px solid rgba(0,229,160,0.15);
+      border-radius: 2px; padding: 0.2rem 0.6rem;
+      font-size: 0.68rem; color: var(--accent); letter-spacing: 0.05em;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .edu-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .edu-card:hover { border-color: rgba(255,107,107,0.3); transform: translateY(-4px); }
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .edu-school { color: var(--accent3); font-size: 0.8rem; margin-bottom: 0.3rem; }
+    .edu-year { color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em; }
+    .edu-note {
+      margin-top: 0.8rem; font-size: 0.78rem; color: var(--muted);
+      font-family: 'Fraunces', serif; font-style: italic;
+    }
+
+    /* ── AWARDS ── */
+    #awards { background: var(--surface2); margin: 0; max-width: none; padding: 6rem 4rem; }
+    #awards > * { max-width: 1200px; margin: 0 auto; }
+    .awards-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; max-width: 1200px; margin: 0 auto;
+    }
+    .award-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .award-card:hover { border-color: rgba(255,200,0,0.3); transform: translateY(-3px); }
+    .award-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .award-name {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.9rem; margin-bottom: 0.2rem;
+    }
+    .award-org { color: var(--muted); font-size: 0.72rem; }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .contact-text h2 { margin-bottom: 1rem; }
+    .contact-text p { color: var(--muted); font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.8; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1.2rem 1.5rem;
+      text-decoration: none; color: var(--text);
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); transform: translateX(6px); }
+    .contact-link-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(0,229,160,0.1); border: 1px solid rgba(0,229,160,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-link-text { font-size: 0.82rem; }
+    .contact-link-label { color: var(--muted); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem; border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.72rem; letter-spacing: 0.05em;
+    }
+    footer span { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+      .hero-stats { padding-left: 0; grid-template-columns: 1fr 1fr; }
+      section { padding: 4rem 1.5rem; }
+      #skills, #awards { padding: 4rem 1.5rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .edu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <h1>Vikram Reddy</h1>
-        <p>Software QA Engineer</p>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section id="about" class="section">
-            <h2>About Me</h2>
-            <p>I am a dedicated Software QA Engineer with extensive experience in manual and automated testing. I am passionate about ensuring software quality, identifying bugs, and delivering reliable applications. My expertise spans across different testing methodologies and automation frameworks.</p>
-        </section>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">VR</a>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-        <section id="skills" class="section">
-            <h2>Skills</h2>
-            <ul>
-                <li>✓ Manual Testing & Test Case Design</li>
-                <li>✓ Automated Testing (Selenium, TestNG, JUnit)</li>
-                <li>✓ Performance Testing & Load Testing</li>
-                <li>✓ API Testing (REST, SOAP)</li>
-                <li>✓ Database Testing (SQL)</li>
-                <li>✓ Mobile App Testing</li>
-                <li>✓ Bug Tracking & Reporting (JIRA)</li>
-                <li>✓ Agile & Scrum Methodologies</li>
-                <li>✓ CI/CD Pipelines</li>
-            </ul>
-        </section>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
 
-        <section id="projects" class="section">
-            <h2>Projects & Experience</h2>
-            <ul>
-                <li><strong>E-Commerce Platform Testing</strong> - Performed comprehensive testing including UI, functionality, and API testing for an e-commerce platform.</li>
-                <li><strong>Mobile App QA</strong> - Led automated testing for iOS and Android applications with focus on user experience and performance.</li>
-                <li><strong>Banking System Testing</strong> - Tested critical banking features including transaction processing, security, and compliance.</li>
-                <li><strong>Automation Framework Development</strong> - Created and maintained test automation frameworks using Selenium and Java.</li>
-            </ul>
-        </section>
+    <div class="hero-content">
+      <div class="hero-tag">Open to Opportunities · Sydney, AU</div>
+      <h1>Vikram<em>Reddy.</em></h1>
+      <p class="hero-desc">
+        QA Engineer &amp; Test Automation Specialist with 5.8 years of experience building reliable, scalable test frameworks for banking and legal software.
+      </p>
+      <div class="hero-ctas">
+        <a href="mailto:vikramreddymokalla@gmail.com" class="btn btn-primary">Get in Touch</a>
+        <a href="https://www.linkedin.com/in/vikramreddymokalla/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+      </div>
+    </div>
 
-        <section id="contact" class="section">
-            <h2>Contact Me</h2>
-            <p><strong>Email:</strong> <a href="mailto:vikram.reddy@example.com">vikram.reddy@example.com</a></p>
-            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/vikramreddy" target="_blank">linkedin.com/in/vikramreddy</a></p>
-            <p><strong>GitHub:</strong> <a href="https://github.com/VikramReddy007" target="_blank">github.com/VikramReddy007</a></p>
-        </section>
-    </main>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">5.8</div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Industries Covered</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Awards Earned</div>
+      </div>
+      <div class="stat-card white">
+        <div class="stat-num">M.IT</div>
+        <div class="stat-label">Cybersecurity · CDU</div>
+      </div>
+    </div>
+  </header>
 
-    <footer>
-        <p>&copy; 2026 Vikram Reddy. All rights reserved.</p>
-    </footer>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">// Technical Stack</div>
+    <h2 style="max-width:1200px;margin:0 auto 2.5rem;">Tools &amp; Technologies</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Test Automation</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Selenium (Java)</span>
+          <span class="skill-tag">TestNG</span>
+          <span class="skill-tag">Cucumber</span>
+          <span class="skill-tag">Playwright</span>
+          <span class="skill-tag">RestAssured</span>
+          <span class="skill-tag">Postman</span>
+          <span class="skill-tag">Appium</span>
+          <span class="skill-tag">HP UFT</span>
+          <span class="skill-tag">HP LeanFT</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Testing Types</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Functional</span>
+          <span class="skill-tag">Integration</span>
+          <span class="skill-tag">UAT / IST</span>
+          <span class="skill-tag">Regression</span>
+          <span class="skill-tag">API Testing</span>
+          <span class="skill-tag">Performance</span>
+          <span class="skill-tag">Penetration</span>
+          <span class="skill-tag">Microservices</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">CI/CD & DevOps</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Jenkins</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Azure DevOps</span>
+          <span class="skill-tag">Maven</span>
+          <span class="skill-tag">Gradle</span>
+          <span class="skill-tag">SonarQube</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">JFrog</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools & Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">JIRA</span>
+          <span class="skill-tag">HP ALM</span>
+          <span class="skill-tag">Confluence</span>
+          <span class="skill-tag">TestRail</span>
+          <span class="skill-tag">Splunk</span>
+          <span class="skill-tag">SoapUI</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Bitbucket</span>
+          <span class="skill-tag">GitLab</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">JavaScript / TypeScript</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Methodologies</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Agile / Scrum</span>
+          <span class="skill-tag">Waterfall</span>
+          <span class="skill-tag">BDD</span>
+          <span class="skill-tag">TDD</span>
+          <span class="skill-tag">STLC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">// Career</div>
+    <h2>Professional Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--accent3); box-shadow: 0 0 12px var(--accent3);"></div>
+        <div class="timeline-date">Jan 2025 – Present</div>
+        <div class="timeline-role">SIC Techforce Analyst</div>
+        <div class="timeline-company">Salesforce Australia · Sydney (Contract)</div>
+        <div class="timeline-desc">
+          Providing desktop and AV support at Salesforce Tower Sydney, delivering excellent service to employees, customers, and executives visiting the tower.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--accent2); box-shadow: 0 0 12px var(--accent2);"></div>
+        <div class="timeline-date">Jun 2022 – Nov 2023</div>
+        <div class="timeline-role">QA Engineer</div>
+        <div class="timeline-company">Thomson Reuters International · Hyderabad · Product: HighQ-QCoP</div>
+        <div class="timeline-desc">
+          Worked in the legal domain on HighQ, a business management platform. Migrated Jenkins CI/CD jobs to GitHub Actions. Maintained automation suites and integrated result logging with Azure DevOps via Azure APIs.
+        </div>
+        <div class="timeline-skills">
+          <span class="timeline-skill">Selenium</span>
+          <span class="timeline-skill">TestNG</span>
+          <span class="timeline-skill">RestAssured</span>
+          <span class="timeline-skill">Git Actions</span>
+          <span class="timeline-skill">Azure DevOps</span>
+          <span class="timeline-skill">Jenkins</span>
+          <span class="timeline-skill">JIRA</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Mar 2018 – Jun 2022</div>
+        <div class="timeline-role">Software Engineer (QA)</div>
+        <div class="timeline-company">Tech Mahindra Ltd · Hyderabad · Client: Scotiabank (Canada)</div>
+        <div class="timeline-desc">
+          Worked in the BFSI unit providing QA services for Scotiabank across three major banking applications: EDGE Client (desktop), BRL (web-based customer onboarding), and FFT (web-based teller transactions). Led migration of HP UFT scripts to Selenium, and HP UFT scripts to LeanFT for desktop apps. Maintained and optimised Jenkins pipelines, enforced code quality via SonarQube, and managed dependencies through JFrog Artifactory.
+        </div>
+        <div class="timeline-skills">
+          <span class="timeline-skill">HP UFT</span>
+          <span class="timeline-skill">HP LeanFT</span>
+          <span class="timeline-skill">Selenium + Cucumber</span>
+          <span class="timeline-skill">Jenkins</span>
+          <span class="timeline-skill">HP ALM</span>
+          <span class="timeline-skill">Bitbucket</span>
+          <span class="timeline-skill">SonarQube</span>
+          <span class="timeline-skill">Report Portal</span>
+          <span class="timeline-skill">Splunk</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" style="background:var(--surface); max-width:none; margin:0; padding:6rem 4rem;">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div class="section-label">// Academic Background</div>
+      <h2>Education</h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-degree">Master of Information Technology — Cybersecurity</div>
+          <div class="edu-school">Charles Darwin University · Sydney</div>
+          <div class="edu-year">Graduated Nov 2025</div>
+          <div class="edu-note">🏆 Recipient of the NT Academic Excellence Award for outstanding performance.</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">Bachelor of Technology — Computer Science &amp; Engineering</div>
+          <div class="edu-school">JNTU-Hyderabad · India</div>
+          <div class="edu-year">Graduated May 2017</div>
+          <div class="edu-note">Graduated first class with active participation in technical events and competitions.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <div class="section-label">// Recognition</div>
+    <h2 style="max-width:1200px;margin:0 auto 2.5rem;">Awards &amp; Achievements</h2>
+    <div class="awards-grid">
+      <div class="award-card">
+        <div class="award-icon">🏅</div>
+        <div>
+          <div class="award-name">NT Academic Excellence</div>
+          <div class="award-org">Charles Darwin University · 2025</div>
+        </div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">🤖</div>
+        <div>
+          <div class="award-name">Automation Ninja</div>
+          <div class="award-org">Tech Mahindra · May 2021</div>
+        </div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">👏</div>
+        <div>
+          <div class="award-name">Pat on Back</div>
+          <div class="award-org">Tech Mahindra · Mar 2021</div>
+        </div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">⭐</div>
+        <div>
+          <div class="award-name">Bravo Award</div>
+          <div class="award-org">Tech Mahindra · Oct 2019</div>
+        </div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">👏</div>
+        <div>
+          <div class="award-name">Pat on Back</div>
+          <div class="award-org">Tech Mahindra · Mar 2022</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <div class="section-label">// Let's Connect</div>
+        <h2>Open to New Roles</h2>
+        <p>
+          I'm actively seeking QA Engineer and Test Automation opportunities in Sydney. If you're building something and need someone who's deeply passionate about quality and reliability, let's talk.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:vikramreddymokalla@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          <div>
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-text">vikramreddymokalla@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/vikramreddymokalla/" target="_blank" class="contact-link">
+          <div class="contact-link-icon">in</div>
+          <div>
+            <div class="contact-link-label">LinkedIn</div>
+            <div class="contact-link-text">linkedin.com/in/vikramreddymokalla</div>
+          </div>
+        </a>
+        <a href="#" class="contact-link">
+          <div class="contact-link-icon">📍</div>
+          <div>
+            <div class="contact-link-label">Location</div>
+            <div class="contact-link-text">Sydney, New South Wales, Australia</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Built with care · <span>Vikram Reddy</span> © 2025
+  </footer>
+
+  <script>
+    // Intersection Observer for timeline animations
+    const items = document.querySelectorAll('.timeline-item');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 120);
+        }
+      });
+    }, { threshold: 0.1 });
+    items.forEach(el => obs.observe(el));
+
+    // Nav active link highlight on scroll
+    const sections = document.querySelectorAll('section[id], header');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id || '';
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+      });
+    });
+  </script>
 </body>
 </html>
