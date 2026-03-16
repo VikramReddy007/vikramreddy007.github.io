@@ -17,6 +17,23 @@
       --muted: #6b6b80;
       --border: rgba(255,255,255,0.07);
       --glow: rgba(0,229,160,0.15);
+      --nav-bg: rgba(10,10,15,0.85);
+      --grid-line: rgba(255,255,255,0.02);
+    }
+
+    html.light {
+      --bg: #f5f5f0;
+      --surface: #ffffff;
+      --surface2: #ededea;
+      --accent: #00a372;
+      --accent2: #5b3fd6;
+      --accent3: #e04040;
+      --text: #111118;
+      --muted: #7a7a8a;
+      --border: rgba(0,0,0,0.1);
+      --glow: rgba(0,163,114,0.1);
+      --nav-bg: rgba(245,245,240,0.9);
+      --grid-line: rgba(0,0,0,0.04);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,7 +63,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.2rem 4rem;
-      background: rgba(10,10,15,0.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
@@ -83,8 +100,8 @@
     .hero-grid-lines {
       position: absolute; inset: 0; z-index: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
       background-size: 60px 60px;
     }
     .hero-content { position: relative; z-index: 1; }
@@ -225,7 +242,7 @@
     }
     .timeline-item {
       padding-left: 3rem; margin-bottom: 3.5rem; position: relative;
-      opacity: 0; transform: translateX(-20px);
+      opacity: 1; transform: translateX(0);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .timeline-item.visible { opacity: 1; transform: translateX(0); }
@@ -343,6 +360,23 @@
       .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
       .edu-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── THEME TOGGLE ── */
+    #theme-toggle {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    #theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.08);
+    }
   </style>
 </head>
 <body>
@@ -357,6 +391,9 @@
       <li><a href="#awards">Awards</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+      <span id="theme-icon">☀️</span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -371,16 +408,16 @@
         QA Engineer &amp; Test Automation Specialist with 5.8 years of experience building reliable, scalable test frameworks for banking and legal software.
       </p>
       <div class="hero-ctas">
-        <a href="mailto:vikramreddymokalla@gmail.com" class="btn btn-primary">Get in Touch</a>
+        <a href="/cdn-cgi/l/email-protection#bec8d7d5ccdfd3ccdbdadac7d3d1d5dfd2d2dffed9d3dfd7d290ddd1d3" class="btn btn-primary">Get in Touch</a>
         <a href="https://www.linkedin.com/in/vikramreddymokalla/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
       </div>
     </div>
 
     <div class="hero-stats">
-      <div class="stat-card">
+      <a href="#experience" class="stat-card" style="text-decoration:none; color:inherit; cursor:pointer;">
         <div class="stat-num">5.8</div>
-        <div class="stat-label">Years of Experience</div>
-      </div>
+        <div class="stat-label">Years of Experience ↓</div>
+      </a>
       <div class="stat-card purple">
         <div class="stat-num">3+</div>
         <div class="stat-label">Industries Covered</div>
@@ -614,11 +651,11 @@
         </p>
       </div>
       <div class="contact-links">
-        <a href="mailto:vikramreddymokalla@gmail.com" class="contact-link">
+        <a href="/cdn-cgi/l/email-protection#5026393b22313d22353434293d3f3b313c3c3110373d31393c7e333f3d" class="contact-link">
           <div class="contact-link-icon">✉</div>
           <div>
             <div class="contact-link-label">Email</div>
-            <div class="contact-link-text">vikramreddymokalla@gmail.com</div>
+            <div class="contact-link-text"><span class="__cf_email__" data-cfemail="55233c3e273438273031312c383a3e34393934153238343c397b363a38">[email&#160;protected]</span></div>
           </div>
         </a>
         <a href="https://www.linkedin.com/in/vikramreddymokalla/" target="_blank" class="contact-link">
@@ -643,7 +680,7 @@
     Built with care · <span>Vikram Reddy</span> © 2025
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Intersection Observer for timeline animations
     const items = document.querySelectorAll('.timeline-item');
     const obs = new IntersectionObserver((entries) => {
@@ -658,15 +695,4 @@
     // Nav active link highlight on scroll
     const sections = document.querySelectorAll('section[id], header');
     const navLinks = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 120) current = s.id || '';
-      });
-      navLinks.forEach(a => {
-        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
-      });
-    });
-  </script>
-</body>
-</html>
+    window.addEventListener('scrol
