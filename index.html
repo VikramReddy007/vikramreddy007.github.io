@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -680,7 +680,7 @@
     Built with care · <span>Vikram Reddy</span> © 2025
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
     // Intersection Observer for timeline animations
     const items = document.querySelectorAll('.timeline-item');
     const obs = new IntersectionObserver((entries) => {
@@ -695,4 +695,32 @@
     // Nav active link highlight on scroll
     const sections = document.querySelectorAll('section[id], header');
     const navLinks = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scrol
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id || '';
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+      });
+    });
+
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-icon');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') {
+      document.documentElement.classList.remove('light');
+      icon.textContent = '☀️';
+    } else {
+      document.documentElement.classList.add('light');
+      icon.textContent = '🌙';
+    }
+    toggle.addEventListener('click', () => {
+      const isLight = document.documentElement.classList.toggle('light');
+      icon.textContent = isLight ? '🌙' : '☀️';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>
